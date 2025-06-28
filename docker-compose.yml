@@ -1,0 +1,29 @@
+# docker-compose.yml - Versão Corrigida e Melhorada
+
+# Define a versão do Docker Compose a ser usada. 3.8 é uma ótima escolha.
+version: '3.8'
+
+# Define a lista de serviços (containers) que compõem sua aplicação.
+services:
+  # Nome do nosso serviço de análise.
+  retdec:
+    # Instrução de build: Constrói uma imagem a partir do Dockerfile
+    # localizado no mesmo diretório ('.') que este arquivo.
+    build: .
+
+    # Nomeia o container de forma previsível para facilitar o acesso.
+    container_name: retdec-service
+
+    # Mapeia o diretório local "./data" para o diretório "/work" dentro do container.
+    # É assim que você move arquivos entre seu PC e o container.
+    volumes:
+      - ./data:/work
+
+    # Define o diretório de trabalho padrão dentro do container.
+    # Quando você entrar, começará aqui.
+    working_dir: /work
+
+    # Comando para manter o container rodando indefinidamente em segundo plano,
+    # permitindo que você se conecte a ele a qualquer momento.
+    # Sem isso, o container pararia imediatamente após o build.
+    command: sleep infinity
